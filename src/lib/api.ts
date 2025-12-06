@@ -1,0 +1,72 @@
+import { toast } from "sonner";
+
+/**
+ * Clears all authentication data and redirects to login
+ */
+export const handleLogout = () => {
+  // Clear all authentication data
+  localStorage.removeItem("accessToken");
+  localStorage.removeItem("refreshToken");
+  localStorage.removeItem("tokenType");
+  localStorage.removeItem("user");
+  
+  // Show toast notification
+  toast.error("Your session has expired. Please login again.");
+  
+  // Redirect to login page
+  window.location.href = "/auth";
+};
+
+/**
+ * Checks if the response indicates token expiration or unauthorized access
+ * and handles logout automatically
+ */
+export const checkTokenExpiration = (response: Response): boolean => {
+  if (response.status === 401) {
+    handleLogout();
+    return true; // Token expired
+  }
+  return false; // Token is valid
+};
+
+/**
+ * Enhanced fetch wrapper that automatically handles token expiration
+ */
+export const apiFetch = async (
+  url: string,
+  options: RequestInit = {}
+): Promise<Response> => {
+  // Get access token for authorization if not already in headers
+  if (!options.headers || !(options.headers as any)["Authorization"]) {
+    const accessToken = localStorage.getItem("accessToken");
+    const tokenType = localStorage.getItem("tokenType") || "Bearer";
+    
+    if (accessToken) {
+      options.headers = {
+        ...options.headers,
+        Authorization: `${tokenType} ${accessToken}`,
+      };
+    }
+  }
+
+  // Ensure Content-Type is set for JSON requests
+  if (options.body && typeof options.body === "string") {
+    try {
+      JSON.parse(options.body);
+      options.headers = {
+        "Content-Type": "application/json",
+        ...options.headers,
+      };
+    } catch {
+      // Not JSON, skip
+    }
+  }
+
+  const response = await fetch(url, options);
+  
+  // Check for token expiration
+  checkTokenExpiration(response);
+  
+  return response;
+};
+
