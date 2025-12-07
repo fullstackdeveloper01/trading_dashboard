@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Copy, RefreshCw, VolumeX, MicOff, MoreVertical, Loader2, Save } from "lucide-react";
 import { toast } from "sonner";
-import { apiFetch, checkTokenExpiration } from "@/lib/api";
+import { apiFetch, checkTokenExpiration, getApiBaseUrl } from "@/lib/api";
 
 interface TradingViewSettings {
   tradingKey: string;
@@ -78,7 +78,7 @@ const TradeSettings = () => {
     setIsLoading(true);
     try {
       const response = await apiFetch(
-        `http://localhost:3000/api/trade-settings/${userId}`,
+        `${getApiBaseUrl()}/api/trade-settings/${userId}`,
         {
           method: "GET",
         }
@@ -133,7 +133,7 @@ const TradeSettings = () => {
 
     try {
       const response = await apiFetch(
-        `http://localhost:3000/api/trade-settings/${userId}/tradingview/webhook-url`,
+        `${getApiBaseUrl()}/api/trade-settings/${userId}/tradingview/webhook-url`,
         {
           method: "GET",
         }
@@ -164,7 +164,7 @@ const TradeSettings = () => {
     setIsSaving(true);
     try {
       const response = await apiFetch(
-        `http://localhost:3000/api/trade-settings/${userId}`,
+        `${getApiBaseUrl()}/api/trade-settings/${userId}`,
         {
           method: "PUT",
           body: JSON.stringify({
@@ -218,7 +218,7 @@ const TradeSettings = () => {
     setIsSaving(true);
     try {
       const response = await apiFetch(
-        `http://localhost:3000/api/trade-settings/${userId}/tradingview`,
+        `${getApiBaseUrl()}/api/trade-settings/${userId}/tradingview`,
         {
           method: "PUT",
           body: JSON.stringify({
@@ -262,7 +262,7 @@ const TradeSettings = () => {
     setIsSaving(true);
     try {
       const response = await apiFetch(
-        `http://localhost:3000/api/trade-settings/${userId}/amibroker`,
+        `${getApiBaseUrl()}/api/trade-settings/${userId}/amibroker`,
         {
           method: "PUT",
           body: JSON.stringify({
@@ -303,7 +303,7 @@ const TradeSettings = () => {
     setIsSaving(true);
     try {
       const response = await apiFetch(
-        `http://localhost:3000/api/trade-settings/${userId}/chartink`,
+        `${getApiBaseUrl()}/api/trade-settings/${userId}/chartink`,
         {
           method: "PUT",
           body: JSON.stringify({
@@ -343,8 +343,8 @@ const TradeSettings = () => {
     setIsGeneratingKey(type);
     try {
       const endpoint = type === "tradingView" 
-        ? `http://localhost:3000/api/trade-settings/${userId}/tradingview/generate-key`
-        : `http://localhost:3000/api/trade-settings/${userId}/amibroker/generate-key`;
+        ? `${getApiBaseUrl()}/api/trade-settings/${userId}/tradingview/generate-key`
+        : `${getApiBaseUrl()}/api/trade-settings/${userId}/amibroker/generate-key`;
 
       const response = await apiFetch(endpoint, {
         method: "POST",

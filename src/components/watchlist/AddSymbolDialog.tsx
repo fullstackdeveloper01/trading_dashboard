@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/select";
 import { ChevronUp, ChevronDown, Loader2 } from "lucide-react";
 import { toast } from "sonner";
-import { apiFetch, checkTokenExpiration } from "@/lib/api";
+import { apiFetch, checkTokenExpiration, getApiBaseUrl } from "@/lib/api";
 
 interface AddSymbolDialogProps {
   open: boolean;
@@ -135,7 +135,7 @@ export const AddSymbolDialog = ({
 
       // Call API
       const response = await apiFetch(
-        `http://localhost:3000/api/watchlist`,
+        `${getApiBaseUrl()}/api/watchlist`,
         {
           method: "POST",
           body: JSON.stringify(requestBody),

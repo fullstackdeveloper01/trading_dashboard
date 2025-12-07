@@ -37,7 +37,7 @@ import { CalendarIcon, ChevronUp, ChevronDown, Search, MoreVertical, Volume2, Mi
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
-import { apiFetch, checkTokenExpiration } from "@/lib/api";
+import { apiFetch, checkTokenExpiration, getApiBaseUrl } from "@/lib/api";
 
 interface ActivityLog {
   id: string | number;
@@ -93,7 +93,7 @@ const MyActivity = () => {
       }
 
       const response = await apiFetch(
-        `http://localhost:3000/api/activity?${params.toString()}`,
+        `${getApiBaseUrl()}/api/activity?${params.toString()}`,
         { method: "GET" }
       );
 

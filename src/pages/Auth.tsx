@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { Loader2, Eye, EyeOff, Mail, Lock } from "lucide-react";
 import { toast } from "sonner";
 import { ForgotPasswordDialog } from "@/components/auth/ForgotPasswordDialog";
+import { getApiBaseUrl } from "@/lib/api";
 
 const Auth = () => {
   const navigate = useNavigate();
@@ -57,7 +58,7 @@ const Auth = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch("http://localhost:3000/api/users/login", {
+      const response = await fetch(`${getApiBaseUrl()}/api/users/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -185,7 +186,7 @@ const Auth = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch("http://localhost:3000/api/users", {
+      const response = await fetch(`${getApiBaseUrl()}/api/users`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

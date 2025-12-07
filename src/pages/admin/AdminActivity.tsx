@@ -55,6 +55,7 @@ import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import { adminApiFetch, checkAdminTokenExpiration } from "@/lib/adminApi";
+import { getApiBaseUrl } from "@/lib/api";
 
 interface ActivityLog {
   id: string | number;
@@ -118,7 +119,7 @@ const AdminActivity = () => {
         }
 
         const response = await adminApiFetch(
-          `http://localhost:3000/api/admin/activity?${params.toString()}`,
+          `${getApiBaseUrl()}/api/admin/activity?${params.toString()}`,
           { method: "GET" }
         );
 

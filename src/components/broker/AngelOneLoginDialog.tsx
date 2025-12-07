@@ -12,7 +12,7 @@ import {
 import { Loader2, WifiOff, VolumeX, MoreVertical } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
-import { apiFetch, checkTokenExpiration } from "@/lib/api";
+import { apiFetch, checkTokenExpiration, getApiBaseUrl, getRedirectUri } from "@/lib/api";
 
 interface AngelOneLoginDialogProps {
   open: boolean;
@@ -77,13 +77,13 @@ export const AngelOneLoginDialog = ({
 
       // Call broker login API
       const response = await apiFetch(
-        `http://localhost:3000/api/brokers/login`,
+        `${getApiBaseUrl()}/api/brokers/login`,
         {
           method: "POST",
           body: JSON.stringify({
             userId: userId,
             brokerName: brokerName,
-            redirectURI: "http://localhost:3000/callback",
+            redirectURI: getRedirectUri(),
             credentials: {
               brokerUserID: formData.brokerUserID,
               password: formData.password,

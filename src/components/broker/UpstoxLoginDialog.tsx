@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dialog";
 import { Loader2, Eye, EyeOff } from "lucide-react";
 import { toast } from "sonner";
+import { getApiBaseUrl, getRedirectUri } from "@/lib/api";
 
 interface UpstoxLoginDialogProps {
   open: boolean;
@@ -109,13 +110,13 @@ export const UpstoxLoginDialog = ({
 
       // Call broker login API
       const response = await apiFetch(
-        `http://localhost:3000/api/brokers/login`,
+        `${getApiBaseUrl()}/api/brokers/login`,
         {
           method: "POST",
           body: JSON.stringify({
             userId: userId,
             brokerName: brokerName,
-            redirectURI: formData.redirectUri || "http://localhost:3000/callback",
+            redirectURI: formData.redirectUri || getRedirectUri(),
             credentials: formData,
           }),
         }

@@ -4,7 +4,7 @@ import { Header } from "@/components/layout/Header";
 import { BrokerCard } from "@/components/broker/BrokerCard";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
-import { apiFetch, checkTokenExpiration } from "@/lib/api";
+import { apiFetch, checkTokenExpiration, getApiBaseUrl } from "@/lib/api";
 
 interface Broker {
   id: string;
@@ -51,7 +51,7 @@ const Brokers = () => {
       }
 
       const response = await apiFetch(
-        `http://localhost:3000/api/brokers/dashboard/${userId}`,
+        `${getApiBaseUrl()}/api/brokers/dashboard/${userId}`,
         {
           method: "GET",
         }

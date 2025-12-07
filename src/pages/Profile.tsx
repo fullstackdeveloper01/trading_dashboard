@@ -9,7 +9,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
-import { apiFetch, checkTokenExpiration } from "@/lib/api";
+import { apiFetch, checkTokenExpiration, getApiBaseUrl } from "@/lib/api";
 import { 
   User, 
   Mail, 
@@ -86,7 +86,7 @@ const Profile = () => {
       }
 
       const response = await apiFetch(
-        `http://localhost:3000/api/users/profile`,
+        `${getApiBaseUrl()}/api/users/profile`,
         {
           method: "GET",
         }
@@ -212,7 +212,7 @@ const Profile = () => {
 
       // Call update profile API
       const response = await apiFetch(
-        `http://localhost:3000/api/users/profile`,
+        `${getApiBaseUrl()}/api/users/profile`,
         {
           method: "PUT",
           body: JSON.stringify({
@@ -365,7 +365,7 @@ const Profile = () => {
 
       // Call change password API
       const response = await apiFetch(
-        `http://localhost:3000/api/users/change-password`,
+        `${getApiBaseUrl()}/api/users/change-password`,
         {
           method: "PUT",
           body: JSON.stringify({

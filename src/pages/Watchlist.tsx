@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Plus, Edit, Copy, Trash2, Play, TrendingUp, BarChart2, Loader2, Search } from "lucide-react";
 import { toast } from "sonner";
-import { apiFetch, checkTokenExpiration } from "@/lib/api";
+import { apiFetch, checkTokenExpiration, getApiBaseUrl } from "@/lib/api";
 import {
   Dialog,
   DialogContent,
@@ -141,7 +141,7 @@ const Watchlist = () => {
       }
 
       const response = await apiFetch(
-        `http://localhost:3000/api/watchlist?${params.toString()}`,
+        `${getApiBaseUrl()}/api/watchlist?${params.toString()}`,
         {
           method: "GET",
         }
@@ -230,7 +230,7 @@ const Watchlist = () => {
       if (!userId) return;
 
       const response = await apiFetch(
-        `http://localhost:3000/api/brokers/dashboard/${userId}`,
+        `${getApiBaseUrl()}/api/brokers/dashboard/${userId}`,
         { method: "GET" }
       );
 
@@ -260,7 +260,7 @@ const Watchlist = () => {
     setIsDuplicating(itemId);
     try {
       const response = await apiFetch(
-        `http://localhost:3000/api/watchlist/${itemId}/duplicate`,
+        `${getApiBaseUrl()}/api/watchlist/${itemId}/duplicate`,
         { method: "POST" }
       );
 
@@ -297,7 +297,7 @@ const Watchlist = () => {
     setIsExecuting(true);
     try {
       const response = await apiFetch(
-        `http://localhost:3000/api/watchlist/${selectedItemId}/execute`,
+        `${getApiBaseUrl()}/api/watchlist/${selectedItemId}/execute`,
         {
           method: "POST",
           body: JSON.stringify({
@@ -336,7 +336,7 @@ const Watchlist = () => {
     setIsLoadingAnalytics(itemId);
     try {
       const response = await apiFetch(
-        `http://localhost:3000/api/watchlist/${itemId}/analytics`,
+        `${getApiBaseUrl()}/api/watchlist/${itemId}/analytics`,
         { method: "GET" }
       );
 
@@ -373,7 +373,7 @@ const Watchlist = () => {
       const startDateStr = startDate.toISOString().split("T")[0];
 
       const response = await apiFetch(
-        `http://localhost:3000/api/watchlist/${itemId}/chart?startDate=${startDateStr}`,
+        `${getApiBaseUrl()}/api/watchlist/${itemId}/chart?startDate=${startDateStr}`,
         { method: "GET" }
       );
 

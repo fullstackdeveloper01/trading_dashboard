@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
-import { apiFetch, checkTokenExpiration } from "@/lib/api";
+import { apiFetch, checkTokenExpiration, getApiBaseUrl } from "@/lib/api";
 
 interface DhanLoginDialogProps {
   open: boolean;
@@ -80,7 +80,7 @@ export const DhanLoginDialog = ({
 
       // Call broker login API - only send userId and accessToken
       const response = await apiFetch(
-        `http://localhost:3000/api/brokers/login`,
+        `${getApiBaseUrl()}/api/brokers/login`,
         {
           method: "POST",
           body: JSON.stringify({
@@ -148,7 +148,7 @@ export const DhanLoginDialog = ({
 
       // Call broker login API - only send userId and accessToken
       const response = await apiFetch(
-        `http://localhost:3000/api/brokers/login`,
+        `${getApiBaseUrl()}/api/brokers/login`,
         {
           method: "POST",
           body: JSON.stringify({

@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { Loader2, VolumeX, MicOff, MoreVertical } from "lucide-react";
 import { toast } from "sonner";
+import { getApiBaseUrl, getRedirectUri } from "@/lib/api";
 
 interface AliceBlueLoginDialogProps {
   open: boolean;
@@ -76,13 +77,13 @@ export const AliceBlueLoginDialog = ({
 
       // Call broker login API
       const response = await apiFetch(
-        `http://localhost:3000/api/brokers/login`,
+        `${getApiBaseUrl()}/api/brokers/login`,
         {
           method: "POST",
           body: JSON.stringify({
             userId: userId,
             brokerName: brokerName,
-            redirectURI: "http://localhost:3000/callback",
+            redirectURI: getRedirectUri(),
             credentials: {
               brokerUserID: formData.brokerUserID,
               apiKey: formData.apiKey,

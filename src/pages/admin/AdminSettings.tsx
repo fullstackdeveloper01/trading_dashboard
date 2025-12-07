@@ -35,6 +35,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { adminApiFetch, checkAdminTokenExpiration } from "@/lib/adminApi";
+import { getApiBaseUrl } from "@/lib/api";
 
 const AdminSettings = () => {
   const [isSaving, setIsSaving] = useState(false);
@@ -95,7 +96,7 @@ const AdminSettings = () => {
 
   // System Settings
   const [systemSettings, setSystemSettings] = useState({
-    apiBaseUrl: "http://localhost:3000",
+    apiBaseUrl: getApiBaseUrl(),
     databaseBackup: true,
     logLevel: "info",
     enableAnalytics: true,
@@ -106,7 +107,7 @@ const AdminSettings = () => {
     setIsSaving(true);
     try {
       // Here you would call the API to save settings
-      // const response = await adminApiFetch(`http://localhost:3000/api/admin/settings/${section}`, {
+      // const response = await adminApiFetch(`${getApiBaseUrl()}/api/admin/settings/${section}`, {
       //   method: "PUT",
       //   body: JSON.stringify(settings)
       // });

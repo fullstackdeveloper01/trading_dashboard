@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { Settings, Code, RefreshCw, Star } from "lucide-react";
 import { toast } from "sonner";
-import { apiFetch, checkTokenExpiration } from "@/lib/api";
+import { apiFetch, checkTokenExpiration, getApiBaseUrl } from "@/lib/api";
 import { AngelOneLoginDialog } from "./AngelOneLoginDialog";
 import { AliceBlueLoginDialog } from "./AliceBlueLoginDialog";
 import { DhanLoginDialog } from "./DhanLoginDialog";
@@ -137,7 +137,7 @@ export const BrokerCard = ({ name, logo, connected, accountId, balance, status, 
       const brokerApiId = getBrokerApiId(brokerId);
 
       const response = await apiFetch(
-        `http://localhost:3000/api/brokers/toggle/${userId}/${brokerApiId}`,
+        `${getApiBaseUrl()}/api/brokers/toggle/${userId}/${brokerApiId}`,
         {
           method: "PUT",
         }
@@ -201,7 +201,7 @@ export const BrokerCard = ({ name, logo, connected, accountId, balance, status, 
       const brokerApiId = getBrokerApiId(brokerId);
 
       const response = await apiFetch(
-        `http://localhost:3000/api/brokers/refresh/${userId}/${brokerApiId}`,
+        `${getApiBaseUrl()}/api/brokers/refresh/${userId}/${brokerApiId}`,
         {
           method: "POST",
         }

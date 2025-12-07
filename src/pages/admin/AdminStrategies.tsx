@@ -20,6 +20,7 @@ import {
 import { Search, Loader2, Brain, Plus, Edit, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { adminApiFetch, checkAdminTokenExpiration } from "@/lib/adminApi";
+import { getApiBaseUrl } from "@/lib/api";
 import { format } from "date-fns";
 
 interface UserInfo {
@@ -62,7 +63,7 @@ const AdminStrategies = () => {
       queryParams.append("limit", pagination.limit.toString());
 
       const response = await adminApiFetch(
-        `http://localhost:3000/api/admin/strategies?${queryParams.toString()}`,
+        `${getApiBaseUrl()}/api/admin/strategies?${queryParams.toString()}`,
         { method: "GET" }
       );
 

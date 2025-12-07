@@ -49,6 +49,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { adminApiFetch, checkAdminTokenExpiration } from "@/lib/adminApi";
+import { getApiBaseUrl } from "@/lib/api";
 
 interface PricingPlan {
   id: string;
@@ -94,7 +95,7 @@ const AdminPricingPlans = () => {
     setIsLoading(true);
     try {
       const response = await adminApiFetch(
-        `http://localhost:3000/api/admin/pricing-plans`,
+        `${getApiBaseUrl()}/api/admin/pricing-plans`,
         { method: "GET" }
       );
 
@@ -227,8 +228,8 @@ const AdminPricingPlans = () => {
   const handleSave = async () => {
     try {
       const url = selectedPlan
-        ? `http://localhost:3000/api/admin/pricing-plans/${selectedPlan.id}`
-        : `http://localhost:3000/api/admin/pricing-plans`;
+        ? `${getApiBaseUrl()}/api/admin/pricing-plans/${selectedPlan.id}`
+        : `${getApiBaseUrl()}/api/admin/pricing-plans`;
 
       const response = await adminApiFetch(url, {
         method: selectedPlan ? "PUT" : "POST",
@@ -259,7 +260,7 @@ const AdminPricingPlans = () => {
     setIsDeleting(true);
     try {
       const response = await adminApiFetch(
-        `http://localhost:3000/api/admin/pricing-plans/${planId}`,
+        `${getApiBaseUrl()}/api/admin/pricing-plans/${planId}`,
         { method: "DELETE" }
       );
 

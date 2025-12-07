@@ -1,6 +1,20 @@
 import { toast } from "sonner";
 
 /**
+ * Get the API base URL from environment variables
+ */
+export const getApiBaseUrl = (): string => {
+  return import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
+};
+
+/**
+ * Get the redirect URI from environment variables
+ */
+export const getRedirectUri = (): string => {
+  return import.meta.env.VITE_REDIRECT_URI || "http://localhost:3000/callback";
+};
+
+/**
  * Clears all authentication data and redirects to login
  */
 export const handleLogout = () => {

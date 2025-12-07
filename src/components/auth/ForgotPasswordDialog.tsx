@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dialog";
 import { Loader2, Mail, CheckCircle2 } from "lucide-react";
 import { toast } from "sonner";
+import { getApiBaseUrl } from "@/lib/api";
 
 interface ForgotPasswordDialogProps {
   open: boolean;
@@ -65,7 +66,7 @@ export const ForgotPasswordDialog = ({
     setError("");
 
     try {
-      const response = await fetch("http://localhost:3000/api/users/forgot-password", {
+      const response = await fetch(`${getApiBaseUrl()}/api/users/forgot-password`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

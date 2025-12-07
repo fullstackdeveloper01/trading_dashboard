@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
 import { Loader2, Eye, EyeOff, Shield, Lock } from "lucide-react";
 import { toast } from "sonner";
+import { getApiBaseUrl } from "@/lib/api";
 
 const AdminAuth = () => {
   const navigate = useNavigate();
@@ -65,7 +66,7 @@ const AdminAuth = () => {
 
     try {
       // Call admin login API
-      const response = await fetch("http://localhost:3000/api/admin/login", {
+      const response = await fetch(`${getApiBaseUrl()}/api/admin/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -18,6 +18,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { adminApiFetch, checkAdminTokenExpiration } from "@/lib/adminApi";
+import { getApiBaseUrl } from "@/lib/api";
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
 
 interface DashboardData {
@@ -74,7 +75,7 @@ const AdminDashboard = () => {
   const fetchDashboardData = useCallback(async () => {
     try {
       const response = await adminApiFetch(
-        `http://localhost:3000/api/admin/dashboard`,
+        `${getApiBaseUrl()}/api/admin/dashboard`,
         { method: "GET" }
       );
 

@@ -20,6 +20,7 @@ import {
 import { Search, Loader2, Database, User } from "lucide-react";
 import { toast } from "sonner";
 import { adminApiFetch, checkAdminTokenExpiration } from "@/lib/adminApi";
+import { getApiBaseUrl } from "@/lib/api";
 import { format } from "date-fns";
 
 interface UserInfo {
@@ -67,7 +68,7 @@ const AdminBrokerList = () => {
       queryParams.append("limit", pagination.limit.toString());
 
       const response = await adminApiFetch(
-        `http://localhost:3000/api/admin/brokers?${queryParams.toString()}`,
+        `${getApiBaseUrl()}/api/admin/brokers?${queryParams.toString()}`,
         { method: "GET" }
       );
 

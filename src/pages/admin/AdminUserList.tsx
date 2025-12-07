@@ -28,6 +28,7 @@ import {
 import { Search, Edit, Trash2, Eye, Loader2, UserPlus } from "lucide-react";
 import { toast } from "sonner";
 import { adminApiFetch, checkAdminTokenExpiration } from "@/lib/adminApi";
+import { getApiBaseUrl } from "@/lib/api";
 
 interface User {
   id: string;
@@ -52,7 +53,7 @@ const AdminUserList = () => {
     setIsLoading(true);
     try {
       const response = await adminApiFetch(
-        `http://localhost:3000/api/admin/users${search ? `?search=${search}` : ""}`,
+        `${getApiBaseUrl()}/api/admin/users${search ? `?search=${search}` : ""}`,
         { method: "GET" }
       );
 
@@ -91,7 +92,7 @@ const AdminUserList = () => {
 
     try {
       const response = await adminApiFetch(
-        `http://localhost:3000/api/admin/users/${selectedUser.id}`,
+        `${getApiBaseUrl()}/api/admin/users/${selectedUser.id}`,
         { method: "DELETE" }
       );
 
