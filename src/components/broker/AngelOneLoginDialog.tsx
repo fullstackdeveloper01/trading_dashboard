@@ -10,7 +10,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Loader2, WifiOff, VolumeX, MoreVertical } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import { apiFetch, checkTokenExpiration, getApiBaseUrl, getRedirectUri } from "@/lib/api";
 
